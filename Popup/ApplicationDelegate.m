@@ -7,8 +7,7 @@
 
 #pragma mark -
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_panelController removeObserver:self forKeyPath:@"hasActivePanel"];
 }
 
@@ -16,8 +15,7 @@
 
 void *kContextActivePanel = &kContextActivePanel;
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (context == kContextActivePanel) {
         self.menubarController.hasActiveIcon = self.panelController.hasActivePanel;
     }
@@ -28,14 +26,12 @@ void *kContextActivePanel = &kContextActivePanel;
 
 #pragma mark - NSApplicationDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)notification
-{
+- (void)applicationDidFinishLaunching:(NSNotification *)notification {
     // Install icon into the menu bar
     self.menubarController = [[MenubarController alloc] init];
 }
 
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
-{
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
     // Explicitly remove the icon from the menu bar
     self.menubarController = nil;
     return NSTerminateNow;
@@ -43,16 +39,14 @@ void *kContextActivePanel = &kContextActivePanel;
 
 #pragma mark - Actions
 
-- (IBAction)togglePanel:(id)sender
-{
+- (IBAction)togglePanel:(id)sender {
     self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
     self.panelController.hasActivePanel = self.menubarController.hasActiveIcon;
 }
 
 #pragma mark - Public accessors
 
-- (PanelController *)panelController
-{
+- (PanelController *)panelController {
     if (_panelController == nil) {
         _panelController = [[PanelController alloc] initWithDelegate:self];
         [_panelController addObserver:self forKeyPath:@"hasActivePanel" options:0 context:kContextActivePanel];
@@ -62,8 +56,7 @@ void *kContextActivePanel = &kContextActivePanel;
 
 #pragma mark - PanelControllerDelegate
 
-- (StatusItemView *)statusItemViewForPanelController:(PanelController *)controller
-{
+- (StatusItemView *)statusItemViewForPanelController:(PanelController *)controller {
     return self.menubarController.statusItemView;
 }
 

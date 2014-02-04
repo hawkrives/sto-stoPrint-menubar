@@ -16,8 +16,7 @@
 
 #pragma mark -
 
-- (void)drawRect:(NSRect)dirtyRect
-{
+- (void)drawRect:(NSRect)dirtyRect {
     NSRect contentRect = NSInsetRect([self bounds], LINE_THICKNESS, LINE_THICKNESS);
     NSBezierPath *path = [NSBezierPath bezierPath];
     
@@ -68,8 +67,7 @@
 #pragma mark -
 #pragma mark Public accessors
 
-- (void)setArrowX:(NSInteger)value
-{
+- (void)setArrowX:(NSInteger)value {
     _arrowX = value;
     [self setNeedsDisplay:YES];
 }

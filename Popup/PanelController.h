@@ -13,8 +13,7 @@
 
 #pragma mark -
 
-@interface PanelController : NSWindowController <NSWindowDelegate>
-{
+@interface PanelController : NSWindowController <NSWindowDelegate> {
     BOOL _hasActivePanel;
     __unsafe_unretained BackgroundView *_backgroundView;
     __unsafe_unretained id<PanelControllerDelegate> _delegate;
